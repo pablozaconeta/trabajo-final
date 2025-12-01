@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stats.gg</title>
+</head>
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main>
+
+        <!-- LOGO -->
+        <section id="logo">
+            <img src="imagen.png" alt="stats.gg">
+        </section>
+
+        <!-- FORMULARIO DE BÚSQUEDA -->
+        <section id="buscador">
+            <form id="formBusqueda">
+                <label for="codigoJugador">Código del Jugador</label>
+                <input type="text" id="codigoJugador" placeholder="" required>
+
+                <label for="nombreJuego">Nombre del Juego</label>
+                <input type="text" id="nombreJuego" placeholder="" required>
+
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
+
+        <!-- RESULTADOS -->
+        <section id="resultados">
+
+            <!-- IMAGEN Y PERFIL -->
+            <div id="header-perfil">
+                <img id="imgJuego" src="imagen-juego.png" alt="Juego">
+                <div id="perfil">
+                    <img id="imgJugador" src="jugador.png" alt="Jugador">
+                    <p id="nombreJugador">(NOMBRE DEL JUGADOR)</p>
+                    <p id="trofeos"> (TROFEOS)</p>
+                    <p id="club">(NOMBRE_DEL_CLUB)</p>
+                </div>
+            </div>
+
+            <!-- TABLAS DE DATOS -->
+            <div id="tablas">
+
+                <!-- DATOS DEL PERFIL -->
+                <div class="tabla">
+                    <h3>DATOS DEL PERFIL</h3>
+                    <table>
+                        <tbody>
+                            <tr><td>Nivel:</td><td>—</td></tr>
+                            <tr><td>Copas:</td><td>—</td></tr>
+                            <tr><td>Modo:</td><td>—</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ESTADÍSTICAS DEL JUEGO -->
+                <div class="tabla">
+                    <h3>ESTADÍSTICAS DEL JUEGO</h3>
+                    <table>
+                        <tbody>
+                            <tr><td>Batallas:</td><td>—</td></tr>
+                            <tr><td>Victorias:</td><td>—</td></tr>
+                            <tr><td>Winrate:</td><td>—</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- LISTA DE PERSONAJES -->
+                <div class="tabla">
+                    <h3>(NOMBRE DEL JUEGO)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Personaje</th>
+                                <th>Copas</th>
+                                <th>Poder</th>
+                                <th>Victorias</th>
+                                <th>Winrate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
