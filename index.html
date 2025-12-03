@@ -3,97 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>stats.gg</title>
+    <title>Stats.gg - Estadísticas de Jugadores de eSports</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        /* ------------------- ESTILOS GENERALES ----------------------- */
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background-color: #080845;
+            color: white;
+            font-size: 1rem; 
+        }
+
+        /* H1 oculto para accesibilidad y SEO */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        main {
+            width: 100%;
+            max-width: 87.5rem; 
+            margin: auto;
+            padding: 1.875rem; 
+        }
+
+        /* ------------------- ENCABEZADO Y LOGO ----------------------- */
+
+        .site-header {
+            text-align: center;
+            margin-bottom: 2.5rem; 
+        }
+
+        .site-logo {
+           
+            width: 450px; 
+            height: 300px;
+            margin-top: 50px;
+        }
+
+        /* ------------------- FORMULARIO DE BÚSQUEDA ----------------------- */
+
+        .search-form-container {
+            background: #0b0b63;
+            padding: 1.875rem; 
+            border-radius: 0.9375rem; 
+            box-shadow: 0 0 0.9375rem #00000070;
+            margin-bottom: 2.5rem; 
+            max-width: 37.5rem; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem; 
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        input, select {
+            padding: 0.9375rem; 
+            border-radius: 0.5rem; 
+            border: none;
+            outline: none;
+            background: #ececec; /* Fondo claro */
+            font-size: 1.1rem;
+        }
+
+        .button-search {
+            padding: 0.9375rem; 
+            
+            /* ESTILO CORREGIDO: Igual que input/select */
+            background: #ececec; 
+            
+            border: none;
+            border-radius: 0.5rem; 
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #080845; /* Color de texto oscuro para el botón */
+        }
+
+        .button-search:hover {
+            /* Un hover sutil */
+            background: #d4d4d4; 
+        }
+
+        /* ------------------- RESPONSIVE ----------------------- */
+
+        @media (min-width: 43.75rem) { 
+            .profile-header {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 68.75rem) { 
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+    </style>
+
 </head>
+
 <body>
 
-    <!-- CONTENEDOR PRINCIPAL -->
+    <h1 class="visually-hidden">Stats.gg </h1>
+
+    <header class="site-header">
+        <img src="imagen.png" alt="Logo de stats.gg" class="site-logo">
+        <nav class="main-nav"></nav>
+    </header>
+
     <main>
 
-        <!-- LOGO -->
-        <section id="logo">
-            <img src="imagen.png" alt="stats.gg">
-        </section>
+        <section id="buscador" class="search-form-container" aria-labelledby="form-heading">
+            <form id="formBusqueda" class="search-form" action="resultados.html" method="GET">
 
-        <!-- FORMULARIO DE BÚSQUEDA -->
-        <section id="buscador">
-            <form id="formBusqueda">
-                <label for="codigoJugador">Código del Jugador</label>
-                <input type="text" id="codigoJugador" placeholder="" required>
+                <label for="codigoJugador">Nombre del Jugador</label>
+                <input type="text" id="codigoJugador" name="codigoJugador" required>
 
                 <label for="nombreJuego">Nombre del Juego</label>
-                <input type="text" id="nombreJuego" placeholder="" required>
+                
+                <select id="nombreJuego" name="nombreJuego" required>
+                    <option value="">Selecciona un juego</option>
+                    <option value="league">League of Legends</option>
+                    <option value="brawl">Brawl Stars</option>
+                    <option value="clash">Clash Royale</option>
+                </select>
 
-                <button type="submit">Buscar</button>
+                <button type="submit" class="button-search">Buscar</button>
             </form>
         </section>
-
-        <!-- RESULTADOS -->
-        <section id="resultados">
-
-            <!-- IMAGEN Y PERFIL -->
-            <div id="header-perfil">
-                <img id="imgJuego" src="imagen-juego.png" alt="Juego">
-                <div id="perfil">
-                    <img id="imgJugador" src="jugador.png" alt="Jugador">
-                    <p id="nombreJugador">(NOMBRE DEL JUGADOR)</p>
-                    <p id="trofeos"> (TROFEOS)</p>
-                    <p id="club">(NOMBRE_DEL_CLUB)</p>
-                </div>
-            </div>
-
-            <!-- TABLAS DE DATOS -->
-            <div id="tablas">
-
-                <!-- DATOS DEL PERFIL -->
-                <div class="tabla">
-                    <h3>DATOS DEL PERFIL</h3>
-                    <table>
-                        <tbody>
-                            <tr><td>Nivel:</td><td>—</td></tr>
-                            <tr><td>Copas:</td><td>—</td></tr>
-                            <tr><td>Modo:</td><td>—</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- ESTADÍSTICAS DEL JUEGO -->
-                <div class="tabla">
-                    <h3>ESTADÍSTICAS DEL JUEGO</h3>
-                    <table>
-                        <tbody>
-                            <tr><td>Batallas:</td><td>—</td></tr>
-                            <tr><td>Victorias:</td><td>—</td></tr>
-                            <tr><td>Winrate:</td><td>—</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- LISTA DE PERSONAJES -->
-                <div class="tabla">
-                    <h3>(NOMBRE DEL JUEGO)</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Personaje</th>
-                                <th>Copas</th>
-                                <th>Poder</th>
-                                <th>Victorias</th>
-                                <th>Winrate</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </section>
-
     </main>
+    
+    <footer>
+        <p>Derechos Reservados © 2025 Stats.gg</p>
+    </footer>
 
 </body>
 </html>
