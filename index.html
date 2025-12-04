@@ -9,128 +9,147 @@
 
     <style>
 
-        /* ------------------- ESTILOS GENERALES ----------------------- */
+          
+            /* ------------------- ESTILOS GENERALES ----------------------- */
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Poppins", sans-serif;
-            background-color: #080845;
-            color: white;
-            font-size: 1rem; 
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #080845;
+    color: white;
+    font-size: 16px;
+}
 
-        /* H1 oculto para accesibilidad y SEO */
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
 
-        main {
-            width: 100%;
-            max-width: 87.5rem; 
-            margin: auto;
-            padding: 1.875rem; 
-        }
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
 
-        /* ------------------- ENCABEZADO Y LOGO ----------------------- */
+/* ------------------- ENCABEZADO ----------------------- */
 
-        .site-header {
-            text-align: center;
-            margin-bottom: 2.5rem; 
-        }
+.site-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-        .site-logo {
-           
-            width: 450px; 
-            height: 300px;
-            margin-top: 50px;
-        }
+.site-logo {
+    width: 350px;
+    height: 300px;
+    margin-top: 30px;
+}
 
-        /* ------------------- FORMULARIO DE BÚSQUEDA ----------------------- */
 
-        .search-form-container {
-            background: #0b0b63;
-            padding: 1.875rem; 
-            border-radius: 0.9375rem; 
-            box-shadow: 0 0 0.9375rem #00000070;
-            margin-bottom: 2.5rem; 
-            max-width: 37.5rem; 
-            margin-left: auto;
-            margin-right: auto;
-        }
+/* ------------------- FORMULARIO ----------------------- */
 
-        .search-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem; 
-        }
+.search-form-container {
+    background: #0b0b63;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #00000070;
+    max-width: 500px;
+    margin: auto;
+    width: 90%;
+}
 
-        label {
-            font-weight: 600;
-            font-size: 1.1em;
-        }
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
 
-        input, select {
-            padding: 0.9375rem; 
-            border-radius: 0.5rem; 
-            border: none;
-            outline: none;
-            background: #ececec; /* Fondo claro */
-            font-size: 1.1rem;
-        }
+label {
+    font-weight: 600px;
+    font-size: 1.05rem;
+}
 
-        .button-search {
-            padding: 0.9375rem; 
-            
-            /* ESTILO CORREGIDO: Igual que input/select */
-            background: #ececec; 
-            
-            border: none;
-            border-radius: 0.5rem; 
-            font-weight: 700;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            color: #080845; /* Color de texto oscuro para el botón */
-        }
+input,
+select,
+.button-search {
+    width: 100%;
+    padding: 16px; 
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    box-sizing: border-box; 
+}
 
-        .button-search:hover {
-            /* Un hover sutil */
-            background: #d4d4d4; 
-        }
 
-        /* ------------------- RESPONSIVE ----------------------- */
+.button-search {
+    background: #ececec;
+    color: #080845;
+    font-weight: 700;
+    cursor: pointer;
+}
 
-        @media (min-width: 43.75rem) { 
-            .profile-header {
-                flex-direction: row;
-                justify-content: center;
-            }
+.button-search:hover {
+    background: #d4d4d4;
+}
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+/* ------------------- RESPONSIVE ----------------------- */
 
-        @media (min-width: 68.75rem) { 
-            .stats-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+/* Teléfonos pequeños */
+@media (max-width: 480px) {
+    .site-logo {
+        width: 90%;
+        margin-top: 15px;
+    }
 
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
+    .search-form-container {
+        padding: 18px;
+        width: 95%;
+    }
+
+    input, select, .button-search {
+        padding: 14px;
+        font-size: 1rem;
+    }
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 768px) {
+    .site-logo {
+        width: 60%;
+    }
+
+    .search-form-container {
+        max-width: 520px;
+    }
+}
+
+/* PC grandes */
+@media (min-width: 1024px) {
+    .site-logo {
+        width: 380px;
+    }
+
+    .search-form-container {
+        max-width: 550px;
+        padding: 28px;
+    }
+}
+
+footer {
+    margin-top: 50px;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}
+
     </style>
 
 </head>
@@ -140,7 +159,7 @@
     <h1 class="visually-hidden">Stats.gg </h1>
 
     <header class="site-header">
-        <img src="imagen.png" alt="Logo de stats.gg" class="site-logo">
+        <img src="logo.jpg" alt="Logo de stats.gg" class="site-logo">
         <nav class="main-nav"></nav>
     </header>
 

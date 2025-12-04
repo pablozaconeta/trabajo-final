@@ -129,6 +129,44 @@
             font-size: 1.05rem;
         }
 
+        
+/*  ANIMACIÓN AL PASAR EL MOUSE */
+.game-figure {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.game-figure:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+
+.player-figure img {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.player-figure img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+}
+
+
+.stats-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stats-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+}
+
+
+.player-profile {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.player-profile:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+
         /* ------------------- RESPONSIVE ----------------------- */
 
         @media (min-width: 43.75rem) { 
@@ -163,13 +201,13 @@
 
             <div class="profile-header">
                 <figure>
-                    <img id="imgJuego" src="imagen-juego.png" alt="Banner del juego seleccionado" class="game-figure">
+                    <img id="imgJuego" src="banner.png" alt="Banner del juego seleccionado" class="game-figure">
                     <figcaption class="visually-hidden">Estadísticas para el juego seleccionado</figcaption>
                 </figure>
 
                 <aside id="perfil" class="player-profile">
                     <figure class="player-figure">
-                        <img id="imgJugador" src="jugador.png" alt="Avatar del Jugador">
+                        <img id="imgJugador" src="avatar.png" alt="Avatar del Jugador">
                     </figure>
                     <p id="nombreJugador">Nombre: **(NOMBRE DEL JUGADOR)**</p>
                     <p id="trofeos">Trofeos: **(TROFEOS)**</p>
