@@ -1,147 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stats.gg</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Poppins", sans-serif;
-            background-color: #080845;
-            color: white;
-            font-size: 1rem; 
-        }
-
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        main {
-            width: 100%;
-            max-width: 87.5rem; 
-            margin: auto;
-            padding: 1.875rem; 
-        }
-
-        h2, h3 {
-            font-family: "Orbitron", sans-serif;
-            margin-bottom: 0.9375rem; 
-            text-align: center;
-            color: white;
-        }
-
-        h2 { font-size: 1.75rem; }
-        h3 { font-size: 1.4rem; }
-
-        .results-section {
-            background: rgb(61, 9, 9);
-            padding: 1.875rem;
-            border-radius: 0.9375rem;
-            margin-top: 2.5rem;
-        }
-
-        .profile-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5625rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .game-figure {
-            width: 100%;
-            max-width: 43.75rem;
-            border-radius: 0.9375rem;
-            transition: 0.4s;
-        }
-        .game-figure:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 20px rgba(255,255,255,0.25);
-        }
-
-        .player-profile {
-            background: rgba(0,0,0,0);
-            padding: 1.5625rem;
-            border-radius: 0.75rem;
-            text-align: center;
-            width: 100%;
-            max-width: 23.75rem;
-        }
-
-        .player-figure img {
-            width: 8.75rem;
-            border-radius: 0.75rem;
-            margin-bottom: 0.9375rem;
-            transition: 0.4s;
-        }
-        .player-figure img:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 25px rgba(255,255,255,0.3);
-        }
-
-        .stats-grid {
-            display: grid;
-            gap: 1.5625rem;
-        }
-
-        .stats-card {
-            background: #1e1e78;
-            padding: 1.25rem;
-            border-radius: 0.75rem;
-            transition: 0.3s;
-        }
-        .stats-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
-        }
-
-        .stats-table {
-            margin-top: 100px;
-            width: 100%;
-            height: 450px;
-            border-collapse: collapse;
-        }
-
-        .stats-table th, .stats-table td {
-            padding: 0.875rem;
-            text-align: center;
-            border-bottom: 1px solid #ffffff22;
-        }
-
-        @media (min-width: 700px) {
-            .profile-header { flex-direction: row; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1100px) {
-            .stats-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stats.gg</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #080845;
+        color: white;
+        font-size: 1.5rem;
+    }
+ 
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+ 
+    main {
+        width: 100%;
+        max-width: 87.5rem;
+        margin: auto;
+        padding: 1.875rem;
+    }
+ 
+    h2, h3 {
+        font-family: "Orbitron", sans-serif;
+        margin-bottom: 0.9375rem;
+        text-align: center;
+        color: white;
+    }
+ 
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.4rem; }
+ 
+    .results-section {
+        background: rgb(61, 9, 9);
+        padding: 1.875rem;
+        border-radius: 0.9375rem;
+        margin-top: 2.5rem;
+    }
+ 
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5625rem;
+        margin-bottom: 2.5rem;
+    }
+ 
+    .game-figure {
+        width: 1000px;
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.9375rem;
+        transition: 0.4s;
+    }
+    .game-figure:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(255,255,255,0.25);
+    }
+ 
+    .player-profile {
+        background: rgba(0,0,0,0);
+        padding: 1.5625rem;
+        border-radius: 0.75rem;
+        text-align: center;
+        width: 100%;
+        max-width: 23.75rem;
+    }
+ 
+    .player-figure img {
+        width: 8.75rem;
+        border-radius: 0.75rem;
+        margin-bottom: 0.9375rem;
+        transition: 0.4s;
+    }
+    .player-figure img:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    }
+ 
+    .stats-grid {
+        display: grid;
+        gap: 1.5625rem;
+    }
+ 
+    .stats-card {
+        background: #1e1e78;
+        padding: 1.25rem;
+        border-radius: 0.75rem;
+        transition: 0.3s;
+        overflow-x: auto; /* permite scroll en tablas grandes */
+    }
+    .stats-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+    }
+ 
+    .stats-table {
+        margin-top: 20px;
+        width: 100%;
+        height: auto;
+        border-collapse: collapse;
+        min-width: 300px; /* asegura scroll en móviles */
+    }
+ 
+    .stats-table th, .stats-table td {
+        padding: 0.875rem;
+        text-align: center;
+        border-bottom: 1px solid #ffffff22;
+    }
+ 
+    /* RESPONSIVE */
+    @media (min-width: 700px) {
+        .profile-header { flex-direction: row; justify-content: space-between; }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1100px) {
+        .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 480px) {
+        body { font-size: 1.2rem; }
+        .player-figure img { width: 6rem; }
+        .game-figure { width: 100%; height: auto; }
+        .stats-table th, .stats-table td { padding: 0.5rem; font-size: 0.9rem; }
+        .stats-card { padding: 0.75rem; }
+    }
+ 
+    footer {
+        text-align: center;
+        padding: 20px;
+    }
+</style>
 </head>
-
+ 
 <body>
-
+ 
 <article id="resultados" class="results-section">
     <h2 class="visually-hidden">Resultados</h2>
-
+ 
     <div class="profile-header">
         <figure>
             <img id="imgJuego" src="banner.png" alt="Banner" class="game-figure">
         </figure>
-
+ 
         <aside class="player-profile">
             <figure class="player-figure">
                 <img id="imgJugador" src="avatar.png" alt="Jugador">
@@ -151,142 +162,84 @@
             <p id="club">Club: —</p>
         </aside>
     </div>
-
+ 
     <div class="stats-grid">
-
+ 
         <section class="stats-card">
             <h3>DATOS DEL PERFIL</h3>
             <table class="stats-table" id="tablaPerfil"></table>
         </section>
-
+ 
         <section class="stats-card">
             <h3>ESTADÍSTICAS DEL JUEGO</h3>
             <table class="stats-table" id="tablaStats"></table>
         </section>
-
+ 
         <section class="stats-card">
             <h3 id="tituloPersonajes">Personajes</h3>
             <table class="stats-table" id="tablaPersonajes"></table>
         </section>
-
+ 
     </div>
 </article>
-
+ 
 <script>
-/*  BASE DE DATOS PNG*/
+/* Tu código JS original */
 const DB = {
     league: {
         bannerImg: "banner league of legends.png",
         avatarImg: "avatar lol.png",
         titulo: "Campeones",
-        perfil: [
-            ["Nivel", 224],
-            ["Servidor", "LAS"],
-            ["Rango", "Diamante II"],
-        ],
-        stats: [
-            ["Partidas Totales", 3528],
-            ["KDA Promedio", "3.34"],
-            ["Winrate", "55.8%"],
-        ],
-        personajes: [
-            ["Zed", 540, "3.9", "58%"],
-            ["Ahri", 320, "4.2", "61%"],
-            ["Yasuo", 700, "3.0", "53%"],
-            ["Lux", 280, "4.5", "60%"]
-        ]
+        perfil: [["Nivel", 224], ["Servidor", "LAS"], ["Rango", "Diamante II"]],
+        stats: [["Partidas Totales", 3528], ["KDA Promedio", "3.34"], ["Winrate", "55.8%"]],
+        personajes: [["Zed", 540, "3.9", "58%"], ["Ahri", 320, "4.2", "61%"], ["Yasuo", 700, "3.0", "53%"], ["Lux", 280, "4.5", "60%"]]
     },
-
     brawl: {
-        bannerImg: "img/brawl_banner.png",
-        avatarImg: "img/brawl_avatar.png",
+        bannerImg: "banner brawl star.png",
+        avatarImg: "avatar brawl.png",
         titulo: "Brawlers",
-        perfil: [
-            ["Nivel", 187],
-            ["Liga", "Diamante II"],
-            ["Trofeos", 42785],
-        ],
-        stats: [
-            ["Partidas Totales", 12340],
-            ["Victorias", 7820],
-            ["Winrate", "63%"],
-        ],
-        personajes: [
-            ["Crow", 980, "11", "66%"],
-            ["Shelly", 1200, "10", "60%"],
-            ["Leon", 870, "11", "68%"],
-            ["Spike", 540, "9", "62%"]
-        ]
+        perfil: [["Nivel", 187], ["Liga", "Diamante II"], ["Trofeos", 42785]],
+        stats: [["Partidas Totales", 12340], ["Victorias", 7820], ["Winrate", "63%"]],
+        personajes: [["Crow", 980, "11", "66%"], ["Shelly", 1200, "10", "60%"], ["Leon", 870, "11", "68%"], ["Spike", 540, "9", "62%"]]
     },
-
     clash: {
-        bannerImg: "img/clash_banner.png",
-        avatarImg: "img/clash_avatar.png",
+        bannerImg: "banner clash royale.png",
+        avatarImg: "avatar clash.png",
         titulo: "Cartas",
-        perfil: [
-            ["Nivel Rey", 52],
-            ["Clan", "Latin Warriors"],
-            ["Copas", 6950],
-        ],
-        stats: [
-            ["Partidas Totales", 14210],
-            ["Victorias", 8004],
-            ["Winrate", "56%"],
-        ],
-        personajes: [
-            ["Montapuercos", 14, "32%", "59%"],
-            ["Valquiria", 14, "28%", "61%"],
-            ["Mago Eléctrico", 13, "21%", "57%"],
-            ["Bola de Fuego", 14, "40%", "63%"]
-        ]
+        perfil: [["Nivel Rey", 52], ["Clan", "Latin Warriors"], ["Copas", 6950]],
+        stats: [["Partidas Totales", 14210], ["Victorias", 8004], ["Winrate", "56%"]],
+        personajes: [["Montapuercos", 14, "32%", "59%"], ["Valquiria", 14, "28%", "61%"], ["Mago Eléctrico", 13, "21%", "57%"], ["Bola de Fuego", 14, "40%", "63%"]]
     }
 };
-
-/*  LEER PARAMETROS*/
+ 
 const params = new URLSearchParams(window.location.search);
 const nombre = params.get("codigoJugador") || "Jugador";
 const juego = params.get("nombreJuego");
-
 const data = DB[juego] || DB["league"];
-
-/*   INSERTAR IMÁGENES PNG*/
+ 
 document.getElementById("imgJuego").src = data.bannerImg;
 document.getElementById("imgJugador").src = data.avatarImg;
-
 document.getElementById("nombreJugador").textContent = "Nombre: " + nombre;
-
-
+ 
 let htmlPerfil = "";
 data.perfil.forEach(p => htmlPerfil += `<tr><th>${p[0]}</th><td>${p[1]}</td></tr>`);
 document.getElementById("tablaPerfil").innerHTML = htmlPerfil;
-
-
+ 
 let htmlStats = "";
 data.stats.forEach(s => htmlStats += `<tr><th>${s[0]}</th><td>${s[1]}</td></tr>`);
 document.getElementById("tablaStats").innerHTML = htmlStats;
-
-
+ 
 document.getElementById("tituloPersonajes").textContent = data.titulo;
-
-let htmlPers = `
-<thead>
-<tr><th>${data.titulo}</th><th>Partidas</th><th>Poder/Nivel</th><th>Winrate</th></tr>
-</thead>
-<tbody>
-`;
-
-data.personajes.forEach(p => {
-    htmlPers += `<tr>
-        <td>${p[0]}</td>
-        <td>${p[1]}</td>
-        <td>${p[2]}</td>
-        <td>${p[3]}</td>
-    </tr>`;
-});
+ 
+let htmlPers = `<thead><tr><th>${data.titulo}</th><th>Partidas</th><th>Poder/Nivel</th><th>Winrate</th></tr></thead><tbody>`;
+data.personajes.forEach(p => htmlPers += `<tr><td>${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td><td>${p[3]}</td></tr>`);
 htmlPers += "</tbody>";
-
 document.getElementById("tablaPersonajes").innerHTML = htmlPers;
 </script>
-
+ 
+<footer>
+<p>Derechos Reservados © 2025 Stats.gg</p>
+</footer>
+ 
 </body>
 </html>
