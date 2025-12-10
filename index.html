@@ -1,189 +1,559 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stats.gg - Estadísticas de Jugadores de eSports</title>
- 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap%22 rel="stylesheet">
- 
-    <style>
-        /* ------------------- ESTILOS GENERALES ----------------------- */
-        * {
-            box-sizing: border-box;
-        }
- 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Poppins", sans-serif;
-            background-color: #080845;
-            color: white;
-            font-size: 16px;
-        }
- 
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            margin: -1px;
-            padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
- 
-        main {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
- 
-        /* ------------------- ENCABEZADO ----------------------- */
-        .site-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
- 
-        .site-logo {
-            width: 350px;
-            max-width: 90%;
-            height: auto;
-            margin-top: 30px;
-        }
- 
-        /* ------------------- FORMULARIO ----------------------- */
-        .search-form-container {
-            background: #0b0b63;
-            padding: 22px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px #00000070;
-            max-width: 500px;
-            margin: auto;
-            width: 100%;
-        }
- 
-        .search-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
- 
-        label {
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
- 
-        input,
-        select,
-        .button-search {
-            width: 100%;
-            padding: 16px;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-            font-size: 1.05rem;
-        }
- 
-        .button-search {
-            background: #ececec;
-            color: #080845;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
- 
-        .button-search:hover {
-            background: #d4d4d4;
-            transform: scale(1.02);
-        }
- 
-        /* ------------------- FOOTER ----------------------- */
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
- 
-        /* ------------------- RESPONSIVE ----------------------- */
-        /* Teléfonos pequeños */
-        @media (max-width: 480px) {
-            .site-logo {
-                width: 90%;
-                margin-top: 15px;
-            }
- 
-            .search-form-container {
-                padding: 18px;
-            }
- 
-            input, select, .button-search {
-                padding: 14px;
-                font-size: 1rem;
-            }
-        }
- 
-        /* Tablets y pantallas medianas */
-        @media (min-width: 481px) and (max-width: 1023px) {
-            .site-logo {
-                width: 60%;
-            }
- 
-            .search-form-container {
-                max-width: 520px;
-                padding: 22px;
-            }
- 
-            input, select, .button-search {
-                font-size: 1.05rem;
-            }
-        }
- 
-        /* PC grandes */
-        @media (min-width: 1024px) {
-            .site-logo {
-                width: 380px;
-            }
- 
-            .search-form-container {
-                max-width: 550px;
-                padding: 28px;
-            }
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Stats.gg </title>
+
+<!-- Fuentes -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ------------------- BASE / TIPOGRAFÍA / COLORES ------------------ */
+  :root{
+    --bg:#080845;
+    --card:#0b0b63;
+    --accent:#4fa3ff;
+    --muted:#ececec;
+    --glass: rgba(255,255,255,0.04);
+    --glass-2: rgba(255,255,255,0.02);
+    --neon: 0 0 18px rgba(79,163,255,0.18), 0 0 40px rgba(12,11,99,0.6);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Poppins",sans-serif;
+    background: radial-gradient(ellipse at 20% 10%, rgba(79,163,255,0.04), transparent 15%), var(--bg);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    font-size:16px;
+  }
+  .visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+  main{width:92%;max-width:1200px;margin:24px auto;padding:16px;}
+  header.site-header{text-align:center;margin-bottom:18px}
+  .site-logo{width:320px;max-width:90%;height:auto;margin-top:10px;transform:translateY(-8px)}
+
+  /* ------------------- VISTAS (registro / buscar / resultados) ------------------ */
+  section.view{width:92%;max-width:1200px;margin:24px auto;padding:16px;display:none;opacity:0;transform:translateY(12px);transition:all .36s cubic-bezier(.2,.9,.2,1);min-height:320px}
+  section.view.active{width:92%;max-width:1200px;margin:24px auto;padding:16px;display:block;opacity:1;transform:none}
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
+    border-radius:14px;
+    padding:20px;
+    box-shadow: var(--neon);
+    border:1px solid rgba(255,255,255,0.04);
+  }
+
+  /* ------------------- FORMULARIOS ------------------ */
+  .form-grid{display:grid;gap:12px}
+  label{font-weight:600;font-size:1.05rem;display:block;margin-bottom:6px}
+  input,select,button,textarea{
+    width:100%;padding:12px;border-radius:10px;border:none;outline:none;
+    font-size:1rem;background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;
+  }
+  .btn{
+    display:inline-block;padding:10px 14px;border-radius:10px;border:none;background:var(--muted);color:var(--bg);font-weight:700;cursor:pointer;
+    transition:transform .12s, box-shadow .12s;
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);color:inherit}
+
+  /* ------------------- Registro (pantalla 1) ------------------ */
+  .register-hero{display:flex;gap:18px;align-items:center;flex-direction:column;text-align:center}
+  .register-hero h2{font-family:"Orbitron";margin:0 0 6px;color:var(--accent);font-size:1.5rem}
+  .register-hero p{margin:0 0 12px;color:#cfcff3;font-size:0.95rem}
+
+  /* ------------------- Buscador (pantalla 2) - ajustes de selects no transparentes ------------------ */
+  .search-form-container{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 0 18px #00000070;max-width:620px;margin:16px auto}
+  .search-form{display:flex;flex-direction:column;gap:12px}
+  .button-search{background:var(--muted);color:var(--bg);font-weight:700;cursor:pointer;padding:12px;border-radius:8px}
+  .button-search:hover{filter:brightness(.96);transform:scale(1.02)}
+
+  /* specifically make inputs/selects inside search-form opaque and readable */
+  .search-form input, .search-form select {
+    background: #ffffff;       /* solid white so options/users are visible */
+    color: #080845;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+
+  /* ------------------- Resultados (pantalla 3) ------------------ */
+  .results-section{background:rgba(255,255,255,0.02);padding:20px;border-radius:12px;margin-top:18px}
+  .profile-header{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:18px}
+  .game-figure{width:1000px;max-width:100%;height:auto;border-radius:12px;transition:transform .4s}
+  .player-profile{background:transparent;padding:12px;border-radius:10px;text-align:center;width:100%;max-width:280px}
+  .player-figure img{width:140px;border-radius:12px;transition:transform .25s;display:block;margin:0 auto}
+  .stats-grid{display:grid;gap:12px}
+  .stats-card{background:#9f4ba2;padding:14px;border-radius:10px;transition:transform .25s;overflow:auto}
+  .stats-card:hover{transform:translateY(-8px)}
+  .stats-table{width:100%;border-collapse:collapse}
+  .stats-table th,.stats-table td,.stats-card{padding:10px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.95rem}
+  .big-metric{font-size:1.6rem;font-weight:700;color:var(--accent)}
+
+  /* tiny uniform text rule for trend & rank boxes */
+  .uniform-text { font-size: 0.98rem; line-height:1.4; color: #e9eefc; }
+
+  /* small badges / micro UI */
+  .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);font-weight:600}
+
+  /* Back bar */
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+  .breadcrumbs{color:#cfcff3;font-size:.95rem}
+
+  /* ------------------- Animaciones futuristas ------------------ */
+  .glow{
+    box-shadow:0 4px 28px rgba(79,163,255,0.12), 0 0 60px rgba(12,11,99,0.35);
+    border:1px solid rgba(255, 100, 79, 0.08);
+    transition:transform .18s;
+  }
+  .glow:hover{transform:translateY(-5px) scale(1.01)}
+
+  @keyframes pulse {
+    0%{transform:scale(1);opacity:.95}
+    50%{transform:scale(1.01);opacity:1}
+    100%{transform:scale(1);opacity:.95}
+  }
+  .pulse{animation:pulse 3.6s ease-in-out infinite}
+
+  /* ------------------- Responsive ------------------ */
+  @media (min-width:700px){
+    .profile-header{flex-direction:row;justify-content:space-between;align-items:center}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (min-width:1100px){
+    .stats-grid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:760px){
+    main{width:95%}
+    .site-logo{width:220px}
+    .player-figure img{width:96px}
+    .stats-table th,.stats-table td{padding:8px;font-size:0.9rem}
+    .card{padding:14px}
+    .search-form-container{padding:16px}
+    .register-hero p{font-size:0.92rem}
+  }
+  @media (max-width:420px){
+    body{font-size:14px}
+    .site-logo{width:180px}
+    .stats-grid{gap:10px}
+    .stats-card{padding:12px}
+  }
+</style>
 </head>
- 
 <body>
-    <h1 class="visually-hidden">Stats.gg</h1>
- 
-    <header class="site-header">
-        <img src="imagen.png" alt="Logo de stats.gg" class="site-logo">
-        <nav class="main-nav"></nav>
-    </header>
- 
-    <main>
-        <section id="buscador" class="search-form-container" aria-labelledby="form-heading">
-            <form id="formBusqueda" class="search-form" action="resultados.html" method="GET">
-                <label for="codigoJugador">Nombre del Jugador</label>
-                <input type="text" id="codigoJugador" name="codigoJugador" required>
- 
-                <label for="nombreJuego">Nombre del Juego</label>
-                <select id="nombreJuego" name="nombreJuego" required>
-                    <option value="">Selecciona un juego</option>
-                    <option value="league">League of Legends</option>
-                    <option value="brawl">Brawl Stars</option>
-                    <option value="clash">Clash Royale</option>
-                </select>
- 
-                <button type="submit" class="button-search">Buscar</button>
-            </form>
-        </section>
-    </main>
-   
-    <footer>
-        <p>Derechos Reservados © 2025 Stats.gg</p>
+  <header class="site-header">
+    <img src="LOGO OFICIAL.png" alt="Logo de stats.gg" class="site-logo">
+    <nav class="main-nav" aria-label="Navegación principal"></nav>
+  </header>
+
+  <main>
+    <!-- Topbar con botón volver (se mostrará/ocultará según vista) -->
+    <div class="topbar" id="topbar" style="display:none">
+      <div>
+        <button id="backBtn" class="btn btn-ghost" type="button">← Volver</button>
+      </div>
+      <div class="breadcrumbs" id="crumbs">Inicio</div>
+    </div>
+
+    <!-- ================== VISTA 1: Registro ================== -->
+    <section id="view-register" class="view active" aria-labelledby="reg-title">
+      <div class="card register-hero glow pulse" role="region" aria-label="Registro de usuario">
+        <h2 id="reg-title">Regístrate</h2>
+        <p>Antes de buscar un jugador, asegurate de que estes registrado</p>
+
+        <form id="formRegister" class="form-grid" onsubmit="return false;" aria-label="Formulario de registro">
+          <div>
+            <label for="regUsername">Nombre de usuario</label>
+            <input id="regUsername" name="regUsername" placeholder="Ej: player123" required />
+          </div>
+          <div>
+            <label for="regEmail">Email</label>
+            <input id="regEmail" name="regEmail" type="email" placeholder="tucorreo@ejemplo.com" required />
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button id="btnCreate" class="btn" type="submit">Crear cuenta</button>
+            <button id="btnSkip" class="btn btn-ghost" type="button">Ir a buscar (sin registro)</button>
+          </div>
+          <small style="color:#cfcff3">Los datos de cada usuario registrado se guardan localmente en tu navegador</small>
+        </form>
+
+        <div style="margin-top:12px">
+          <strong>Usuarios registrados (local):</strong>
+          <div id="userList" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+    <!-- ================== VISTA 2: Buscar ================== -->
+    <section id="view-search" class="view" aria-labelledby="search-title">
+      <div class="search-form-container card" role="region" aria-label="Buscar jugador">
+        <h2 id="search-title" class="visually-hidden">Buscar Jugador</h2>
+
+        <form id="formBusqueda" class="search-form" action="#" method="GET" onsubmit="return false;">
+          <div>
+            <label for="selectRegistered">Selecciona un usuario registrado</label>
+            <select id="selectRegistered" name="selectRegistered">
+              <option value="">-- Usuario registrado (o escribe uno nuevo abajo) --</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="codigoJugador">Nombre del Jugador</label>
+            <input type="text" id="codigoJugador" name="codigoJugador" required placeholder="Nombre del jugador (ej: player123)">
+          </div>
+
+          <div>
+            <label for="nombreJuego">Nombre del Juego</label>
+            <select id="nombreJuego" name="nombreJuego" required>
+                <option value="">Selecciona un juego</option>
+                <option value="league">League of Legends</option>
+                <option value="brawl">Brawl Stars</option>
+                <option value="clash">Clash Royale</option>
+            </select>
+          </div>
+
+          <div style="display:flex;gap:10px">
+            <button id="btnBuscar" class="button-search btn" type="submit">Buscar</button>
+            <button id="btnRegisterAgain" class="btn btn-ghost" type="button">Registrar nuevo usuario</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================== VISTA 3: Resultados ================== -->
+    <section id="view-results" class="view" aria-labelledby="results-title">
+      <article id="resultados" class="results-section card" aria-live="polite">
+        <h2 id="results-title" class="visually-hidden">Resultados</h2>
+
+        <div class="profile-header">
+          <figure>
+            <img id="imgJuego" src="banner.png" alt="Banner" class="game-figure glow" />
+          </figure>
+
+          <aside class="player-profile">
+            <figure class="player-figure">
+              <img id="imgJugador" src="avatar.png" alt="Jugador" />
+            </figure>
+            <p id="nombreJugador">Nombre: —</p>
+            <p id="trofeos"><span class="badge">Trofeos: —</span></p>
+            <p id="club"><span class="badge">Club / Clan: —</span></p>
+          </aside>
+        </div>
+
+        <div class="stats-grid" id="metricsGrid">
+          <section class="stats-card">
+            <h3>DATOS DEL PERFIL</h3>
+            <table class="stats-table" id="tablaPerfil"></table>
+          </section>
+
+          <section class="stats-card">
+            <h3>ESTADÍSTICAS DEL JUEGO</h3>
+            <table class="stats-table" id="tablaStats"></table>
+          </section>
+
+          <section class="stats-card">
+            <h3 id="tituloPersonajes">Personajes</h3>
+            <table class="stats-table" id="tablaPersonajes"></table>
+          </section>
+
+          <!-- TENDENCIA & RENDIMIENTO: texto uniforme y más métricas -->
+          <section class="stats-card uniform-text">
+            <h3>TENDENCIA & RENDIMIENTO</h3>
+            <div id="trendContainer"  style="display:flex;flex-direction:column;gap:8px">
+              <!-- se rellenará desde JS con métricas de texto uniforme -->
+            </div>
+          </section>
+
+          <!-- RANK & PROGRESIÓN: más info -->
+          <section class="stats-card uniform-text">
+            <h3>RANK & PROGRESIÓN</h3>
+            <div id="rankContainer" style="display:flex;flex-direction:column;gap:8px" >
+              <!-- se rellenará desde JS -->
+            </div>
+          </section>
+
+          <section class="stats-card">
+            <h3>RECENT MATCHES (SIMULADO)</h3>
+            <table class="stats-table" id="tablaRecent"></table>
+          </section>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:18px;justify-content:center">
+          <button id="btnBackFromResults" class="btn btn-ghost">← Volver</button>
+          <button id="btnNewSearch" class="btn">Nueva búsqueda</button>
+        </div>
+
+      </article>
+    </section>
+
+    <footer style="text-align:center;margin-top:20px">
+      <p>Derechos Reservados © 2025 Stats.gg</p>
     </footer>
+
+<script>
+/* ============================ DATOS BASE (tu DB original) ============================ */
+const DB = {
+    league: {
+        bannerImg: "banner league of legends.png",
+        avatarImg: "avatar lol.png",
+        titulo: "Campeones",
+        perfil: [["Nivel", 224], ["Servidor", "LAS"],["Clan", "Lyon games"], ["Rango", "Diamante II"]],
+        stats: [["Partidas Totales", 3528], ["KDA Promedio", "3.34"], ["Winrate", "55.8%"]],
+        personajes: [["Zed", 540, "58%"], ["Ahri", 320, "61%"], ["Yasuo", 700, "53%"], ["Lux", 280, "60%"]]
+    },
+    brawl: {
+        bannerImg: "banner brawl star.png",
+        avatarImg: "avatar brawl.png",
+        titulo: "Brawlers",
+        perfil: [["Nivel", 187], ["Liga", "Diamante II"],["Clan", "Espectral Legion"], ["Trofeos", 42785]],
+        stats: [["Partidas Totales", 12340], ["Victorias", 7820], ["Winrate", "63%"]],
+        personajes: [["Crow", 980, "66%"], ["Shelly", 1200, "60%"], ["Leon", 870, "68%"], ["Spike", 540, "62%"]]
+    },
+    clash: {
+        bannerImg: "banner clash royale.png",
+        avatarImg: "avatar clash.png",
+        titulo: "Cartas",
+        perfil: [["Nivel Rey", 52], ["Clan", "Latin Warriors"], ["Copas", 6950]],
+        stats: [["Partidas Totales", 14210], ["Victorias", 8004], ["Winrate", "56%"]],
+        personajes: [["Montapuercos", 14, "59%"], ["Valquiria", 14, "61%"], ["Mago Eléctrico", 13, "57%"], ["Bola de Fuego", 14, "63%"]]
+    }
+};
+
+/* ============================ UTIL / VISTAS ============================ */
+const $ = id => document.getElementById(id);
+const views = {
+  register: $('view-register'),
+  search: $('view-search'),
+  results: $('view-results')
+};
+const topbar = $('topbar');
+const crumbs = $('crumbs');
+
+function showView(name, pushCrumb=true){
+  Object.values(views).forEach(v=>v.classList.remove('active'));
+  views[name].classList.add('active');
+  if(name === 'register'){ topbar.style.display='none'; } else { topbar.style.display='flex'; }
+  if(pushCrumb){
+    const c = name === 'register' ? 'Registro' : (name === 'search'? 'Buscar' : 'Resultados');
+    crumbs.textContent = `Stats.gg · ${c}`;
+  }
+}
+
+/* ============================ LOCAL STORAGE: usuarios ============================ */
+const STORAGE_KEY = 'statsgg_users';
+function loadUsers(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e){ return []; }
+}
+function saveUsers(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+function addUser(obj){
+  const list = loadUsers();
+  list.push(obj);
+  saveUsers(list);
+  return list;
+}
+function renderUserList(){
+  const list = loadUsers();
+  const container = $('userList');
+  const select = $('selectRegistered');
+  container.innerHTML = list.length ? list.map(u=>`<div style="padding:6px 8px;background:#ffffff08;border-radius:8px;margin-bottom:8px;color:#eaf0ff">${u.username} · ${u.email}</div>`).join('') : '<small style="color:#cfcff3">No hay usuarios registrados aún.</small>';
+  select.innerHTML = `<option value="">-- Usuario registrado (o escribe uno nuevo abajo) --</option>` + list.map(u=>`<option value="${u.username}">${u.username}</option>`).join('');
+}
+
+/* ============================ FORM: Registro ============================ */
+$('formRegister').addEventListener('submit', e=>{
+  const user = $('regUsername').value.trim();
+  const email = $('regEmail').value.trim();
+  if(!user || !email) return alert('Completa usuario y correo.');
+  const obj = { username: user, email, created: new Date().toISOString() };
+  addUser(obj);
+  renderUserList();
+  // pasar a buscar prellenando el nombre
+  $('codigoJugador').value = user;
+  showView('search');
+  // feedback
+  $('regUsername').value=''; $('regEmail').value='';
+});
+
+/* permitir skip a buscar */
+$('btnSkip').addEventListener('click', ()=> showView('search'));
+
+/* volver al registro desde buscador */
+$('btnRegisterAgain').addEventListener('click', ()=> showView('register'));
+
+/* cuando seleccionan usuario registrado, prefill */
+$('selectRegistered').addEventListener('change', e=>{
+  const val = e.target.value;
+  if(val) $('codigoJugador').value = val;
+});
+
+/* inicialización */
+renderUserList();
+showView('register');
+
+/* ============================ NAV / BACK BUTTONS ============================ */
+$('backBtn').addEventListener('click', ()=> showView('register'));
+$('btnBackFromResults').addEventListener('click', ()=> showView('search'));
+$('btnNewSearch').addEventListener('click', ()=> showView('search'));
+
+/* ============================ BUSCAR -> Resultados ============================ */
+$('btnBuscar').addEventListener('click', ()=>{
+  const nombre = $('codigoJugador').value.trim();
+  const juego = $('nombreJuego').value;
+  if(!nombre || !juego) return alert('Completa nombre de jugador y selecciona un juego.');
+  renderResults(nombre, juego);
+  showView('results');
+});
+
+/* ============================ RANDOM HELPERS ============================ */
+function randInt(min,max){ return Math.floor(Math.random()*(max-min+1)) + min; }
+function randFloat(min,max,dec=2){ return (Math.random()*(max-min)+min).toFixed(dec); }
+
+/* ============================ GENERADOR DE ESTADÍSTICAS (AJUSTADO) ============================ */
+function generateStatsFor(gameKey){
+  const base = DB[gameKey];
+  if(!base) return {};
+  const matches = randInt(50, 2000);
+  const wins = randInt(Math.floor(matches*0.35), Math.floor(matches*0.9));
+  const winrate = ((wins/matches)*100).toFixed(1) + '%';
+  const kda = randFloat(1.2, 7.5, 2);
+  const avgDamage = randInt(200, 12000);
+  const assistsAvg = randFloat(0.5, 10, 1);
+  const csPerMin = randFloat(3.0, 9.0, 2);
+  const visionAvg = randInt(5,45);
+  const mvp = randInt(0, Math.floor(matches*0.2));
+  const recent = Array.from({length:7}, ()=> Math.random()<0.6 ? 'W' : 'L');
+  const trendWins = recent.filter(r=>r==='W').length;
+  const rankTiers = ['Bronce','Plata','Oro','Platino','Diamante','Master','Grandmaster','Challenger'];
+  const rank = rankTiers[randInt(0, rankTiers.length-1)];
+  const peakRank = rankTiers[Math.max(0, randInt(0, rankTiers.indexOf(rank)||4))];
+  // personajes: name | partidas | winrate
+  const chars = base.personajes.map(p=>{
+    return [
+      p[0],
+      randInt(Math.max(1, p[1]-40), p[1]+40),    // partidas
+      (randInt(40,80) + '%')                     // winrate
+    ];
+  });
+
+  // extra rank history
+  const eloChange = (randInt(-200, 400));
+  const mmr = randInt(1000, 3000);
+
+  return {
+    perfil: [
+      ["Nivel (sim)", randInt(10,300)],
+      ["Rango (sim)", rank],
+      ...base.perfil.filter(x=>x[0]!=='Nivel' && x[0]!=='Rango')
+    ],
+    stats: [
+      ["Partidas Totales (sim)", matches],
+      ["Victorias (sim)", wins],
+      ["Winrate (sim)", winrate],
+      ["KDA Promedio (sim)", kda],
+      ["Daño Promedio (sim)", avgDamage],
+      ["Asistencias Promedio (sim)", assistsAvg],
+      ["CS / min (sim)", csPerMin],
+      ["Visión Prom (sim)", visionAvg],
+      ["MVPs (sim)", mvp]
+    ],
+    personajes: chars,
+    trend: {
+      last7: recent.join(' '),
+      wins: trendWins,
+      kdaTrend: (randFloat(1.0,5.0,2)),
+      dmgAvg: avgDamage,
+      assistsAvg,
+      csPerMin,
+      visionAvg
+    },
+    rankInfo: [
+      ["Rank Actual", rank],
+      ["MMR Estimado", mmr],
+      ["Progresión", `${randInt(0,100)}%`],
+      ["Peak Rank", peakRank],
+      ["Cambio ELO (30d)", (eloChange>0?'+':'') + eloChange],
+      ["Racha Actual", `${randInt(0,8)} victorias`]
+    ],
+    recentMatches: Array.from({length:8}, (_,i) => {
+      return { match: i+1, result: Math.random()<0.6?'W':'L', score: `${randInt(0,30)} - ${randInt(0,30)}`, kda: randFloat(0.8,7.5,2) };
+    })
+  };
+}
+
+/* ============================ RENDER DE RESULTADOS EN DOM (AJUSTADO) ============================ */
+function renderResults(nombre, juegoKey){
+  const templateData = DB[juegoKey] || DB.league;
+  const gen = generateStatsFor(juegoKey);
+
+  // banner / avatar
+  $('imgJuego').src = templateData.bannerImg || 'banner.png';
+  $('imgJugador').src = templateData.avatarImg || 'avatar.png';
+  $('nombreJugador').textContent = `Nombre: ${nombre}`;
+  $('trofeos').innerHTML = `<span class="badge">Trofeos: ${randInt(500,90000)}</span>`;
+  $('club').innerHTML = `<span class="badge">Club: ${templateData.perfil.find(x=>x[0].toLowerCase().includes('clan')||x[0].toLowerCase().includes('club'))?.[1] || '—'}</span>`;
+
+  // tabla perfil
+  let htmlPerfil = "";
+  gen.perfil.forEach(p => htmlPerfil += `<tr><th>${p[0]}</th><td>${p[1]}</td></tr>`);
+  $('tablaPerfil').innerHTML = htmlPerfil;
+
+  // tabla stats
+  let htmlStats = "";
+  gen.stats.forEach(s => htmlStats += `<tr><th>${s[0]}</th><td>${s[1]}</td></tr>`);
+  $('tablaStats').innerHTML = htmlStats;
+
+  // titulo personajes (sin columna poder/nivel)
+  $('tituloPersonajes').textContent = templateData.titulo || 'Personajes';
+  let htmlPers = `<thead><tr><th>${templateData.titulo}</th><th>Partidas</th><th>Winrate</th></tr></thead><tbody>`;
+  gen.personajes.forEach(p => htmlPers += `<tr><td>${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td></tr>`);
+  htmlPers += "</tbody>";
+  $('tablaPersonajes').innerHTML = htmlPers;
+
+  // tendencia y rendimiento (texto uniforme y más métricas)
+  const trendHTML = [
+    `Historial 7 días: ${gen.trend.last7} · ${gen.trend.wins}/7 wins`,
+    `KDA reciente: ${gen.trend.kdaTrend}`,
+    `Daño promedio: ${gen.trend.dmgAvg}`,
+    `Asistencias promedio: ${gen.trend.assistsAvg}`,
+    `CS / min: ${gen.trend.csPerMin}`,
+    `Visión promedio: ${gen.trend.visionAvg}`
+  ].map(t => `<div style="padding:8px 6px;border-radius:8px;background:rgba(255,255,255,0.02)">${t}</div>`).join('');
+  $('trendContainer').innerHTML = trendHTML;
+
+  // rank & progresión (más info)
+  const rankHTML = gen.rankInfo.map(r => `<div style="padding:8px 6px;border-radius:8px;background:rgba(255,255,255,0.02)"><strong style="display:block;color:#dfe9ff">${r[0]}</strong><span style="color:#e6f0ff">${r[1]}</span></div>`).join('');
+  $('rankContainer').innerHTML = rankHTML;
+
+  // recent matches
+  let htmlRecent = `<thead><tr><th>#</th><th>Resultado</th><th>Puntaje</th><th>KDA</th></tr></thead><tbody>`;
+  gen.recentMatches.forEach(m => htmlRecent += `<tr><td>${m.match}</td><td>${m.result}</td><td>${m.score}</td><td>${m.kda}</td></tr>`);
+  htmlRecent += "</tbody>";
+  $('tablaRecent').innerHTML = htmlRecent;
+
+  // small animation spacing
+  Array.from(document.querySelectorAll('.stats-card')).forEach((el, i)=>{
+    el.style.animationDelay = (i*40)+'ms';
+  });
+}
+
+/* ============================ Carga inicial: aplicar params si existen ============================ */
+(function applyQuery(){
+  const params = new URLSearchParams(window.location.search);
+  const nombre = params.get("codigoJugador") || params.get("player"); // soporta variantes
+  const juego = params.get("nombreJuego") || params.get("juego");
+  if(nombre) $('codigoJugador').value = nombre;
+  if(juego) $('nombreJuego').value = juego;
+})();
+</script>
 </body>
 </html>
